@@ -1,0 +1,253 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 8,
+    "passes": 8,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-12-20T09:39:58.684Z",
+    "end": "2025-12-20T09:40:01.745Z",
+    "duration": 3061,
+    "testsRegistered": 8,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "dfd0beff-ad79-47ff-b1b5-e0408bde7e5c",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "77c9db6a-adfc-4989-98ad-ba4a12acfbbe",
+          "title": "Validasi JSON Schema - Login & Add User",
+          "fullFile": "D:\\Sandra\\Course\\1. DigitalScola\\Tugas\\API_TEST\\test\\jsonSchema.test.js",
+          "file": "\\test\\jsonSchema.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Login response schema should be valid",
+              "fullTitle": "Validasi JSON Schema - Login & Add User Login response schema should be valid",
+              "timedOut": false,
+              "duration": 37,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const loginResponse = {\n  status: 200,\n  token: \"DYNAMIC_TOKEN_FROM_API\",\n  message: \"Login successful\",\n};\nconst loginSchema = {\n  type: \"object\",\n  required: [\"status\", \"token\", \"message\"],\n  properties: {\n    status: { type: \"number\" },\n    token: { type: \"string\" },\n    message: { type: \"string\" },\n  },\n};\nconst validateLogin = ajv.compile(loginSchema);\nconst isLoginValid = validateLogin(loginResponse);\nexpect(\n  isLoginValid,\n  JSON.stringify(validateLogin.errors, null, 2)\n).to.be.true;",
+              "err": {},
+              "uuid": "d31aab8e-70f1-4ad2-bf36-288de4419aed",
+              "parentUUID": "77c9db6a-adfc-4989-98ad-ba4a12acfbbe",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Add User response schema should be valid",
+              "fullTitle": "Validasi JSON Schema - Login & Add User Add User response schema should be valid",
+              "timedOut": false,
+              "duration": 3,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const addUserResponse = {\n  status: 201,\n  userId: \"69465f423d4cf7b09ef3f2b0\",\n  username: \"test\",\n  age: 25,\n  message: \"User successfully added, Hi test!\",\n};\nconst addUserSchema = {\n  type: \"object\",\n  required: [\"status\", \"userId\", \"username\", \"age\", \"message\"],\n  properties: {\n    status: { type: \"number\", enum: [201] },\n    userId: { type: \"string\" },\n    username: { type: \"string\" },\n    age: { type: \"number\" },\n    message: { type: \"string\" },\n  },\n};\nconst validateAddUser = ajv.compile(addUserSchema);\nconst isAddUserValid = validateAddUser(addUserResponse);\nexpect(\n  isAddUserValid,\n  JSON.stringify(validateAddUser.errors, null, 2)\n).to.be.true;",
+              "err": {},
+              "uuid": "886da5f1-f331-4a21-84a0-67a5aee6c687",
+              "parentUUID": "77c9db6a-adfc-4989-98ad-ba4a12acfbbe",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d31aab8e-70f1-4ad2-bf36-288de4419aed",
+            "886da5f1-f331-4a21-84a0-67a5aee6c687"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 40,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "103b5ad1-deca-46f6-a01b-51dc846bb8b4",
+          "title": "Test Login",
+          "fullFile": "D:\\Sandra\\Course\\1. DigitalScola\\Tugas\\API_TEST\\test\\login&add.test.js",
+          "file": "\\test\\login&add.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Valid Login",
+              "fullTitle": "Test Login Valid Login",
+              "timedOut": false,
+              "duration": 559,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await fetch(\n  \"https://belajar-bareng.onrender.com/api/login\",\n  {\n    headers: {\n      \"Content-Type\": \"application/json\",\n    },\n    method: \"POST\",\n    body: JSON.stringify({\n      username: \"admin\",\n      password: \"admin\",\n    }),\n  }\n);\n//  assert.strictEqual(response.status, 200);\nexpect(response.status).to.equal(200);\n// Mencetak Response Body\nconst data = await response.json();\n// console.log(data);\nexpect(data.message).to.eql(\"Login successful\");\n// Simpan Token\ntoken = data.token;\n//console.log(token);",
+              "err": {},
+              "uuid": "2914889b-9db3-4f96-8b45-56910c1b5ab5",
+              "parentUUID": "103b5ad1-deca-46f6-a01b-51dc846bb8b4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Invalid Login (Username/Password empty)",
+              "fullTitle": "Test Login Invalid Login (Username/Password empty)",
+              "timedOut": false,
+              "duration": 240,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await fetch(\n  \"https://belajar-bareng.onrender.com/api/login\",\n  {\n    headers: {\n      \"Content-Type\": \"application/json\",\n    },\n    method: \"POST\",\n    body: JSON.stringify({\n      username: \"\",\n      password: \"admin\",\n    }),\n  }\n);\n//  assert.strictEqual(response.status, 400);\nexpect(response.status).to.equal(400);\n// Mencetak Response Body\nconst data = await response.json();\n// console.log(data);\nexpect(data.message).to.eql(\"Username or password is required\");\n// token TIDAK boleh ada\nexpect(data).to.not.have.property(\"token\");",
+              "err": {},
+              "uuid": "bf40ed80-e04a-46a7-841c-52649f5d1240",
+              "parentUUID": "103b5ad1-deca-46f6-a01b-51dc846bb8b4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Invalid Login (Username/Password wrong)",
+              "fullTitle": "Test Login Invalid Login (Username/Password wrong)",
+              "timedOut": false,
+              "duration": 676,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await fetch(\n  \"https://belajar-bareng.onrender.com/api/login\",\n  {\n    headers: {\n      \"Content-Type\": \"application/json\",\n    },\n    method: \"POST\",\n    body: JSON.stringify({\n      username: \"Sandra\",\n      password: \"admin\",\n    }),\n  }\n);\n//  assert.strictEqual(response.status, 401);\nexpect(response.status).to.equal(401);\n// Mencetak Response Body\nconst data = await response.json();\n// console.log(data);\nexpect(data.message).to.eql(\"Invalid username or password!\");\n// token TIDAK boleh ada\nexpect(data).to.not.have.property(\"token\");",
+              "err": {},
+              "uuid": "2f1f9b02-9170-450e-92b3-14258daf8a5d",
+              "parentUUID": "103b5ad1-deca-46f6-a01b-51dc846bb8b4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Get User",
+              "fullTitle": "Test Login Get User",
+              "timedOut": false,
+              "duration": 569,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await fetch(\n  \"https://belajar-bareng.onrender.com/api/users\",\n  {\n    headers: {\n      \"Content-Type\": \"application/json\",\n      authorization: `Bearer ${token}`,\n    },\n  }\n);\n//  assert.strictEqual(response.status, 200);\nexpect(response.status).to.equal(200);\n// Mencetak Response Body\nconst data = await response.json();\n//s console.log(data);",
+              "err": {},
+              "uuid": "c1593bfc-f6e3-49c1-8b47-72366eda13f4",
+              "parentUUID": "103b5ad1-deca-46f6-a01b-51dc846bb8b4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Add User",
+              "fullTitle": "Test Login Add User",
+              "timedOut": false,
+              "duration": 552,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "expect(token, \"Token from login is missing\").to.exist;\nconst randomUsername = `test_${Date.now()}`;\nconst response = await fetch(\n  \"https://belajar-bareng.onrender.com/api/add-user\",\n  {\n    headers: {\n      \"Content-Type\": \"application/json\",\n      authorization: `Bearer ${token}`,\n    },\n    method: \"POST\",\n    body: JSON.stringify({\n      username: randomUsername,\n      age: 27,\n    }),\n  }\n);\n//  assert.strictEqual(response.status, 201);\nexpect(response.status).to.equal(201);\n// Mencetak Response Body\nconst data = await response.json();\n// console.log(data);\nexpect(data.message).to.include(\"User successfully added\");",
+              "err": {},
+              "uuid": "ecb9ee4e-fb1a-48b0-9cc3-7e64e58f56c1",
+              "parentUUID": "103b5ad1-deca-46f6-a01b-51dc846bb8b4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Add User already",
+              "fullTitle": "Test Login Add User already",
+              "timedOut": false,
+              "duration": 404,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "expect(token, \"Token from login is missing\").to.exist;\nconst response = await fetch(\n  \"https://belajar-bareng.onrender.com/api/add-user\",\n  {\n    headers: {\n      \"Content-Type\": \"application/json\",\n      authorization: `Bearer ${token}`,\n    },\n    method: \"POST\",\n    body: JSON.stringify({\n      username: \"Ridhwan\",\n      age: 27,\n    }),\n  }\n);\n//  assert.strictEqual(response.status, 400);\nexpect(response.status).to.equal(400);\n// Mencetak Response Body\nconst data = await response.json();\n// console.log(data);\nexpect(data.message).to.include(\"already exists!\");",
+              "err": {},
+              "uuid": "ad24dc6e-5fd5-4951-adce-8a39ce09c25b",
+              "parentUUID": "103b5ad1-deca-46f6-a01b-51dc846bb8b4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2914889b-9db3-4f96-8b45-56910c1b5ab5",
+            "bf40ed80-e04a-46a7-841c-52649f5d1240",
+            "2f1f9b02-9170-450e-92b3-14258daf8a5d",
+            "c1593bfc-f6e3-49c1-8b47-72366eda13f4",
+            "ecb9ee4e-fb1a-48b0-9cc3-7e64e58f56c1",
+            "ad24dc6e-5fd5-4951-adce-8a39ce09c25b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3000,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.5"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.2"
+    }
+  }
+}
