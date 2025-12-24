@@ -1,0 +1,119 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-12-24T18:03:34.073Z",
+    "end": "2025-12-24T18:04:07.485Z",
+    "duration": 33412,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "daf437b2-81f9-479d-9d13-ebbdae9e32ff",
+      "title": "",
+      "fullFile": "D:\\Sandra\\Course\\1. DigitalScola\\Tugas\\Web UI Automation\\tests\\test-sauce.js",
+      "file": "\\tests\\test-sauce.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "bf66062a-43da-4367-a187-a0af849d16f6",
+          "title": "Google Search Test",
+          "fullFile": "D:\\Sandra\\Course\\1. DigitalScola\\Tugas\\Web UI Automation\\tests\\test-sauce.js",
+          "file": "\\tests\\test-sauce.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Visit SauceDemo, Login, cek page title dan dropdown (chrome)",
+              "fullTitle": "Google Search Test Visit SauceDemo, Login, cek page title dan dropdown (chrome)",
+              "timedOut": false,
+              "duration": 9467,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "options = new chrome.Options();\noptions.addArguments('--incognito'); // option ke chrome supaya gaada popup password nya\ndriver = await new Builder()\n    .forBrowser('chrome')\n    .setChromeOptions(options)\n    .build();\n// driver = await new Builder().forBrowser('chrome').build();\nawait driver.get('https://www.saucedemo.com');\nconst title = await driver.getTitle();\n// assert: memastikan object sama persis\nassert.strictEqual(title, 'Swag Labs');\n// inputs\nlet inputUsername = await driver.findElement(By.css('[data-test=\"username\"]'))\nlet inputPassword = await driver.findElement(By.xpath('//*[@data-test=\"password\"]'))\nlet buttonLogin = await driver.findElement(By.className('submit-button btn_action'))\nawait inputUsername.sendKeys('standard_user')\nawait inputPassword.sendKeys('secret_sauce')\nawait buttonLogin.click()\n\n// tunggu element tampil\nlet buttonCart = await driver.wait(\n    until.elementLocated(By.xpath('//*[@data-test=\"shopping-cart-link\"]')), \n    10000\n);\nawait driver.wait(until.elementIsVisible(buttonCart), 5000, 'Shopping cart harus tampil');\n\n// assert: element ada\nawait buttonCart.isDisplayed()\n// assert: text dalam element benar\nlet textAppLogo = await driver.findElement(By.className('app_logo'))\nlet logotext = await textAppLogo.getText()\nassert.strictEqual(logotext, 'Swag Labs')\nawait driver.sleep(1700)\n// pilih dropdown Name (Z to A)\nlet dropdownSort = await driver.findElement(\nBy.css('[data-test=\"product-sort-container\"]')\n);\nawait dropdownSort.sendKeys('Name (Z to A)');\n// ambil semua nama produk\nlet productElements = await driver.findElements(\nBy.className('inventory_item_name')\n);\nlet productNames = [];\nfor (let el of productElements) {\nproductNames.push(await el.getText());\n}\n// urutan yang seharusnya (Z ke A)\nlet sortedNames = [...productNames].sort().reverse();\n// cek urutan sudah benar\nassert.deepStrictEqual(productNames, sortedNames);\nawait driver.quit();",
+              "err": {},
+              "uuid": "6d45099c-6933-4d9f-8e89-00681c7032f7",
+              "parentUUID": "bf66062a-43da-4367-a187-a0af849d16f6",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Visit SauceDemo (firefox)",
+              "fullTitle": "Google Search Test Visit SauceDemo (firefox)",
+              "timedOut": false,
+              "duration": 23935,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "options = new chrome.Options();\noptions.addArguments(\"--headless\");\ndriver = await new Builder().forBrowser('firefox').setChromeOptions(options).build();\n// driver = await new Builder().forBrowser('chrome').build();\nawait driver.get('https://www.saucedemo.com');\nconst title = await driver.getTitle();\nawait driver.quit()",
+              "err": {},
+              "uuid": "de1d8d0a-ba0e-4126-b6d6-232a43d62038",
+              "parentUUID": "bf66062a-43da-4367-a187-a0af849d16f6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6d45099c-6933-4d9f-8e89-00681c7032f7",
+            "de1d8d0a-ba0e-4126-b6d6-232a43d62038"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 33402,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 60000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 60000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.8.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.2"
+    }
+  }
+}
