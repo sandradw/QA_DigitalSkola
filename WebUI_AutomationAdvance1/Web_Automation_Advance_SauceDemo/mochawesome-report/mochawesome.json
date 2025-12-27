@@ -1,0 +1,195 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-12-27T14:47:29.308Z",
+    "end": "2025-12-27T14:48:26.202Z",
+    "duration": 56894,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b13ca10a-4ada-447b-a17d-dfabc9b3d1ff",
+      "title": "",
+      "fullFile": "D:\\Sandra\\Course\\1. DigitalScola\\Tugas\\Web_Automation_SauceDemo\\tests\\test-sauce-advance.js",
+      "file": "\\tests\\test-sauce-advance.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a173249c-ee54-4059-a346-c7c2644a8ca4",
+          "title": "SauceDemo Test",
+          "fullFile": "D:\\Sandra\\Course\\1. DigitalScola\\Tugas\\Web_Automation_SauceDemo\\tests\\test-sauce-advance.js",
+          "file": "\\tests\\test-sauce-advance.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"SauceDemo Test\"",
+              "fullTitle": "SauceDemo Test \"before each\" hook in \"SauceDemo Test\"",
+              "timedOut": false,
+              "duration": 7460,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "options = new chrome.Options();\noptions.addArguments('--incognito');\ndriver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();\nawait login(driver);",
+              "err": {},
+              "uuid": "22900dd4-453b-4f61-87e4-2e417d1db337",
+              "parentUUID": "a173249c-ee54-4059-a346-c7c2644a8ca4",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"SauceDemo Test\"",
+              "fullTitle": "SauceDemo Test \"after each\" hook in \"SauceDemo Test\"",
+              "timedOut": false,
+              "duration": 7723,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.quit();",
+              "err": {},
+              "uuid": "e2fcc802-bc16-4ca3-9b98-81b40af8913e",
+              "parentUUID": "a173249c-ee54-4059-a346-c7c2644a8ca4",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Cek page title SauceDemo",
+              "fullTitle": "SauceDemo Test Cek page title SauceDemo",
+              "timedOut": false,
+              "duration": 9,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const title = await driver.getTitle();\nassert.strictEqual(title, 'Swag Labs');",
+              "err": {},
+              "uuid": "e53b6fe3-f37b-4a23-813f-79101cba7291",
+              "parentUUID": "a173249c-ee54-4059-a346-c7c2644a8ca4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login berhasil dan logo tampil",
+              "fullTitle": "SauceDemo Test Login berhasil dan logo tampil",
+              "timedOut": false,
+              "duration": 54,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let logo = await driver.findElement(By.className('app_logo'));\nlet logoText = await logo.getText();\nassert.strictEqual(logoText, 'Swag Labs');",
+              "err": {},
+              "uuid": "cfaf016e-cd82-4fc3-9824-df36c550a2ad",
+              "parentUUID": "a173249c-ee54-4059-a346-c7c2644a8ca4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Sort produk Name (Z to A)",
+              "fullTitle": "SauceDemo Test Sort produk Name (Z to A)",
+              "timedOut": false,
+              "duration": 952,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let dropdownSort = await driver.findElement(\n        By.css('[data-test=\"product-sort-container\"]')\n    );\n    await dropdownSort.click();\n    await driver.findElement(By.css('option[value=\"za\"]')).click();\n    await driver.sleep(500);\n    let elements = await driver.findElements(\n        By.className('inventory_item_name')\n    );\n    let actual = [];\n    for (let el of elements) {\n        actual.push(await el.getText());\n    }\n    // ASSERTION JELAS Z → A\n    assert.strictEqual(actual[0],'Test.allTheThings() T-Shirt (Red)');\n    assert.strictEqual(actual.at(-1),'Sauce Labs Backpack');",
+              "err": {},
+              "uuid": "167a0c2d-c51d-42cc-8c8c-944404171832",
+              "parentUUID": "a173249c-ee54-4059-a346-c7c2644a8ca4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login dan cek title (Firefox)",
+              "fullTitle": "SauceDemo Test Login dan cek title (Firefox)",
+              "timedOut": false,
+              "duration": 18463,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.quit(); // tutup Chrome\ndriver = await new Builder().forBrowser('firefox').setFirefoxOptions(new firefox.Options()).build();\nawait login(driver);\nconst title = await driver.getTitle();\nassert.strictEqual(title, 'Swag Labs');",
+              "err": {},
+              "uuid": "da7ec49c-41a8-4fac-94d8-d865760ac43e",
+              "parentUUID": "a173249c-ee54-4059-a346-c7c2644a8ca4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e53b6fe3-f37b-4a23-813f-79101cba7291",
+            "cfaf016e-cd82-4fc3-9824-df36c550a2ad",
+            "167a0c2d-c51d-42cc-8c8c-944404171832",
+            "da7ec49c-41a8-4fac-94d8-d865760ac43e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 19478,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 60000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 60000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.8.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.2"
+    }
+  }
+}
