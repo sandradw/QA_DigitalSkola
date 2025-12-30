@@ -1,0 +1,195 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-12-30T15:39:49.881Z",
+    "end": "2025-12-30T15:40:57.616Z",
+    "duration": 67735,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "56bfc5c7-b3d6-43d3-a38a-0303ab409193",
+      "title": "",
+      "fullFile": "D:\\Sandra\\Course\\1. DigitalScola\\Tugas\\Web_Automation_SauceDemo\\tests\\test-sauce-advance2.js",
+      "file": "\\tests\\test-sauce-advance2.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6ca88c2f-d570-4230-8041-2aac1f62b5dd",
+          "title": "SauceDemo Test",
+          "fullFile": "D:\\Sandra\\Course\\1. DigitalScola\\Tugas\\Web_Automation_SauceDemo\\tests\\test-sauce-advance2.js",
+          "file": "\\tests\\test-sauce-advance2.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"SauceDemo Test\"",
+              "fullTitle": "SauceDemo Test \"before each\" hook in \"SauceDemo Test\"",
+              "timedOut": false,
+              "duration": 8600,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "options = new chrome.Options();\noptions.addArguments('--incognito');\ndriver = await new Builder()\n    .forBrowser('chrome')\n    .setChromeOptions(options)\n    .build();\nawait login(driver);",
+              "err": {},
+              "uuid": "d4d77daa-7c4e-40d8-8ea4-1426ed87ccfc",
+              "parentUUID": "6ca88c2f-d570-4230-8041-2aac1f62b5dd",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"SauceDemo Test\"",
+              "fullTitle": "SauceDemo Test \"after each\" hook in \"SauceDemo Test\"",
+              "timedOut": false,
+              "duration": 7540,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.quit();",
+              "err": {},
+              "uuid": "a5fcad0c-a2a9-41d9-8769-c79865b8810c",
+              "parentUUID": "6ca88c2f-d570-4230-8041-2aac1f62b5dd",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Cek page title SauceDemo",
+              "fullTitle": "SauceDemo Test Cek page title SauceDemo",
+              "timedOut": false,
+              "duration": 734,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const title = await driver.getTitle();\nassert.strictEqual(title, 'Swag Labs');\n// Screenshot setelah login\nlet screenshot = await driver.takeScreenshot();\nfs.writeFileSync('./screenshots/page_product.png',Buffer.from(screenshot, \"base64\"));\n//ambil baseline untuk komparasi\n//jika belum ada basleine jadikan page_product.png sebagai baseline\nif (!fs.existsSync('./screenshots/baseline.png')) {\n    fs.copyFileSync('./screenshots/page_product.png', './screenshots/baseline.png');\n    console.log(\"Baseline image saved.\");\n}\n//compare baseline.png dan page_product.png apakah sama\nlet img1 = PNG.sync.read(fs.readFileSync('./screenshots/baseline.png'));\nlet img2 = PNG.sync.read(fs.readFileSync('./screenshots/page_product.png'));\nlet { width, height } = img1;\nlet diff = new PNG ({ width, height });\nlet numDiffPixels = pixelmatch(img1.data, img2.data, diff.data, width, height, { threshold: 0.1 });\nfs. writeFileSync('./screenshots/diff.png', PNG.sync.write(diff));\nif (numDiffPixels > 0){\n    console.log(`Visual differences found! Pixels different: ${numDiffPixels}`);\n} else {\n    console.log(\"No Visual differences found.\");\n}",
+              "err": {},
+              "uuid": "06470afe-de65-4446-bb05-732efb166baf",
+              "parentUUID": "6ca88c2f-d570-4230-8041-2aac1f62b5dd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login berhasil dan logo tampil",
+              "fullTitle": "SauceDemo Test Login berhasil dan logo tampil",
+              "timedOut": false,
+              "duration": 64,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let logo = PageProductFilter.appLogo;\nlet logoText = await driver.findElement(logo).getText();\nassert.strictEqual(logoText, 'Swag Labs');",
+              "err": {},
+              "uuid": "deaef679-6165-4f1a-a137-8e55c8e097dc",
+              "parentUUID": "6ca88c2f-d570-4230-8041-2aac1f62b5dd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Sort produk Name (Z to A)",
+              "fullTitle": "SauceDemo Test Sort produk Name (Z to A)",
+              "timedOut": false,
+              "duration": 878,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let dropdown = PageProductFilter.sortDropdown;\nlet sortZtoA = PageProductFilter.sortZtoA;\nlet productNames = PageProductFilter.productNames;\nawait driver.findElement(dropdown).click();\nawait driver.findElement(sortZtoA).click();\nawait driver.sleep(500);\nlet elements = await driver.findElements(productNames);\nlet actual = [];\nfor (let el of elements) {\n    actual.push(await el.getText());\n}\nassert.strictEqual(actual[0], 'Test.allTheThings() T-Shirt (Red)');\nassert.strictEqual(actual.at(-1), 'Sauce Labs Backpack');",
+              "err": {},
+              "uuid": "3fa7c9f7-93cb-4485-a4fd-a1d60a560a85",
+              "parentUUID": "6ca88c2f-d570-4230-8041-2aac1f62b5dd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login dan cek title (Firefox)",
+              "fullTitle": "SauceDemo Test Login dan cek title (Firefox)",
+              "timedOut": false,
+              "duration": 23311,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.quit();\ndriver = await new Builder()\n    .forBrowser('firefox')\n    .setFirefoxOptions(new firefox.Options())\n    .build();\nawait login(driver);\nconst title = await driver.getTitle();\nassert.strictEqual(title, 'Swag Labs');",
+              "err": {},
+              "uuid": "f0caeb40-9f59-4a3b-930c-9c736167cf74",
+              "parentUUID": "6ca88c2f-d570-4230-8041-2aac1f62b5dd",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "06470afe-de65-4446-bb05-732efb166baf",
+            "deaef679-6165-4f1a-a137-8e55c8e097dc",
+            "3fa7c9f7-93cb-4485-a4fd-a1d60a560a85",
+            "f0caeb40-9f59-4a3b-930c-9c736167cf74"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 24987,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 60000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 60000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.8.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.2"
+    }
+  }
+}
